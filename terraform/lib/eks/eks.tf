@@ -10,6 +10,8 @@ module "eks_cluster" {
   cluster_version                = var.cluster_version
   cluster_endpoint_public_access = true
 
+  cluster_enabled_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+
   cluster_addons = {
     vpc-cni = {
       before_compute = true
@@ -173,6 +175,7 @@ resource "null_resource" "cluster_blocker" {
 resource "null_resource" "addons_blocker" {
   depends_on = [
     time_sleep.addons,
-    aws_eks_addon.adot
+    aws_eks_addon.adot,
+    aws_eks_addon.cloudwatch_observability
   ]
 }

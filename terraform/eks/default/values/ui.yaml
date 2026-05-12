@@ -15,6 +15,11 @@ opentelemetry:
   instrumentation: ${opentelemetry_instrumentation}
 %{ endif }
 
+%{ if application_signals_enabled }
+podAnnotations:
+  instrumentation.opentelemetry.io/inject-java: "true"
+%{ endif }
+
 %{ if istio_enabled }
 istio:
   enabled: true

@@ -124,6 +124,7 @@ resource "helm_release" "carts" {
       image_tag                     = module.container_images.result.cart.tag
       opentelemetry_enabled         = var.opentelemetry_enabled
       opentelemetry_instrumentation = local.opentelemetry_instrumentation
+      application_signals_enabled   = var.application_signals_enabled
       role_arn                      = module.iam_assumable_role_carts.iam_role_arn
       table_name                    = module.dependencies.carts_dynamodb_table_name
     })
@@ -154,6 +155,7 @@ resource "helm_release" "checkout" {
       image_tag                     = module.container_images.result.checkout.tag
       opentelemetry_enabled         = var.opentelemetry_enabled
       opentelemetry_instrumentation = local.opentelemetry_instrumentation
+      application_signals_enabled   = var.application_signals_enabled
       redis_address                 = module.dependencies.checkout_elasticache_primary_endpoint
       redis_port                    = module.dependencies.checkout_elasticache_port
       security_group_id             = aws_security_group.checkout.id
@@ -185,6 +187,7 @@ resource "helm_release" "orders" {
       image_tag                     = module.container_images.result.orders.tag
       opentelemetry_enabled         = var.opentelemetry_enabled
       opentelemetry_instrumentation = local.opentelemetry_instrumentation
+      application_signals_enabled   = var.application_signals_enabled
       database_endpoint_host        = module.dependencies.orders_db_endpoint
       database_endpoint_port        = module.dependencies.orders_db_port
       database_name                 = module.dependencies.orders_db_database_name
@@ -229,6 +232,7 @@ resource "helm_release" "ui" {
       image_tag                     = module.container_images.result.ui.tag
       opentelemetry_enabled         = var.opentelemetry_enabled
       opentelemetry_instrumentation = local.opentelemetry_instrumentation
+      application_signals_enabled   = var.application_signals_enabled
       istio_enabled                 = var.istio_enabled
     })
   ]
