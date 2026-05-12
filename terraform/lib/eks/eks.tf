@@ -45,7 +45,7 @@ module "eks_cluster" {
 
       min_size     = 1
       max_size     = 3
-      desired_size = 1
+      desired_size = 2
     }
 
     node_group_2 = {
@@ -54,9 +54,9 @@ module "eks_cluster" {
       subnet_ids           = [var.subnet_ids[1]]
       force_update_version = true
 
-      min_size     = 1
+      min_size     = 0
       max_size     = 3
-      desired_size = 1
+      desired_size = 0
     }
 
     node_group_3 = {
@@ -65,9 +65,9 @@ module "eks_cluster" {
       subnet_ids           = [var.subnet_ids[2]]
       force_update_version = true
 
-      min_size     = 1
+      min_size     = 0
       max_size     = 3
-      desired_size = 1
+      desired_size = 0
     }
   }
 
